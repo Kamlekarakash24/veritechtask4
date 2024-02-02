@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChillFlixxxxxxxxx</title>
+    <style>
+        #header{
+            background-color: darkslateblue;
+            color:white;
+            padding: 20px;
+            
+
+        }
+        #main{
+            background-color: black;
+            color:white;
+        }
+        #input{
+            border:none;
+        }
+        .topbar{
+            float: right;
+            justify-content: space-evenly;
+        }
+        .icon{
+            margin-right: 100px;
+        }
+        .more{
+            text-decoration: none;
+            color: aqua;
+            float: right;
+        }
+        .main{
+            background-color: black;
+            color: azure;
+            padding: 20px;
+        }
+        .social a{
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color:white;
+        }
+        .footer{
+            display: flex;
+            justify-content: space-around;
+            background-color: gray;
+            color: white;
+        }
+
+        .moviecard{
+            height:300px;
+            width:150px;
+            border:1px solid gray
+        }
+        #movies{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            justify-content: space-around;
+            grid-gap: 20px;
+        }
+        .moviecard{
+            height:480px;
+            width:200px;
+
+        }
+    </style>
+    
+</head>
+<body>
+    <header id="header">
+        <h1>ChillFlixxxxxxxxx</h1>
+        <div class="topbar">
+            <input id="input" type="text" placeholder=" Please Enter movie title">
+            <a href="#"><img class="icon" src="images/search.png" alt="search" height="20px" width="20px"></a>
+            <a href="#"><img class="icon"  src="images/notification.png" height="20px" width="20px" alt="notification"></a>
+            <a href="#"><img class="icon" src="images/profile.png" height="30px" width="30px" alt="profile"></a>
+        </div>
+        <hr>
+    </header>
+    <main class="main">
+        <h1>Much More Movies You Migth Like:;</h1>
+
+        <div id="movies">
+
+        </div>
+    </main>
+
+
+    <footer class="footer">
+        <h1>ChillFlixxxxxxxxx</h1>
+        <div class="social">
+            <h3>follow us</h3>
+            <a href=""><img src="images/facebook.png" alt="facebook" height="20px" width="20px">Facebook</a>
+            <a href=""><img src="images/twitter.png" alt="x" height="20px" width="20px">Twitter/X</a>
+            <a href=""><img src="images/insta.png" alt="insta" height="20px" width="20px">Instagram</a>
+        </div>
+        <div>
+            <h4>Offfice:</h4>
+            <h5>Plot no:xx</h5>
+            <h5>City:xxx</h5>
+            <h5>Country:xxxxxx-xx</h5>
+            <h5>PHONE NUMBER:XXXXXXX</h5>
+        </div>
+    </footer>
+    <script src="moviesdata.js"></script>
+    <script>
+        var moremovies=document.getElementById('movies');
+
+        const movdata=JSON.parse(localStorage.getItem("moviesdata"));
+
+        console.log(movdata);
+
+        var movlang=window.location.search.split('=')[1];
+        console.log(movlang);
+
+        for(let i=0;i<movdata.length;i++)
+        {
+
+            if(movlang===movdata[i].lang){
+                moremovies.append(createmoviecards(movdata[i].id,movdata[i].name,movdata[i].year,movdata[i].lang,movdata[i].poster));
+            }
+        }
+
+        function createmoviecards(id,name,year,lang,poster)
+        {
+        var moviecard=document.createElement('div');
+       moviecard.classList.add('moviecard');
+
+       var movpos=document.createElement('img');
+       movpos.src=poster;
+       movpos.setAttribute('height','300px');
+       movpos.setAttribute('width','200px');
+
+       //var name=document.createTextNode("Title:"+name);
+       var name2=document.createElement("h4");
+       name2.textContent="Title:"+name;
+       //name+=(name2);
+
+       //var year=document.createTextNode("Year:"+year);
+      var year2=document.createElement('h4');
+      year2.textContent="Year :"+year;
+      // year+=(year2);
+      var language=document.createElement('h4');
+      language.textContent="Language :"+lang;
+
+       moviecard.append(movpos);
+       moviecard.append(name2);
+       moviecard.append(year2);
+       moviecard.append(language);
+
+       return moviecard;
+
+        }
+    </script>
+
+    
+</body>
+</html>

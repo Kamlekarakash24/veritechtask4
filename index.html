@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChillFlixx</title>
+    <style>
+        #header{
+            background-color: darkslateblue;
+            color:white;
+            
+
+        }
+        #input{
+            border:none;
+        }
+        .topbar{
+            float: right;
+            justify-content: space-evenly;
+        }
+        .icon{
+            margin-right: 100px;
+        }
+        .more{
+            text-decoration: none;
+            color: aqua;
+            float: right;
+        }
+        .main{
+            background-color: black;
+            color: azure;
+            padding: 20px;
+        }
+        .social a{
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color:white;
+        }
+        .footer{
+            display: flex;
+            justify-content: space-around;
+            background-color: gray;
+            color: white;
+        }
+        #tollywood{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 20px;
+            flex-wrap: wrap;
+
+        }
+        #hollywood{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 20px;
+            flex-wrap: wrap;
+
+        }
+        #bollywood{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 20px;
+            flex-wrap: wrap;
+
+        }
+        .moviecard{
+            height:300px;
+            width:150px;
+            border:1px solid gray
+        }
+
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1>ChillFlixxxxxxxxx</h1>
+        <div class="topbar">
+            <input id="input" type="text" placeholder=" Please Enter movie title">
+            <a href="#"><img class="icon" src="images/search.png" alt="search" height="20px" width="20px"></a>
+            <a href="#"><img class="icon"  src="images/notification.png" height="20px" width="20px" alt="notification"></a>
+            <a href="#"><img class="icon" src="images/profile.png" height="30px" width="30px" alt="profile"></a>
+        </div>
+    </header>
+    <main class="main">
+        <h2>WELCOME USER</h2>
+        <hr>
+        <div>
+            <h3>Top Hits of Hollywood</h3>
+            <a class="more" href="movies.html?lang=english">More Movies</a>
+            <div id="hollywood">
+
+            </div>
+        </div>
+        <div>
+            <h3>Top Hits of Tollywood</h3>
+            <a class="more" href="movies.html?lang=telugu">More Movies</a>
+            <div id="tollywood">
+
+            </div>
+        </div>
+        <div>
+            <h3>Top Hits of Bollywood</h3>
+            <a class="more" href="movies.html?lang=hindi">More Movies</a>
+            <div id="bollywood">
+
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <h1>ChillFlixxxxxxxxx</h1>
+        <div class="social">
+            <h3>follow us</h3>
+            <a href=""><img src="images/facebook.png" alt="facebook" height="20px" width="20px">Facebook</a>
+            <a href=""><img src="images/twitter.png" alt="x" height="20px" width="20px">Twitter/X</a>
+            <a href=""><img src="images/insta.png" alt="insta" height="20px" width="20px">Instagram</a>
+        </div>
+        <div>
+            <h4>Offfice:</h4>
+            <h5>Plot no:xx</h5>
+            <h5>City:xxx</h5>
+            <h5>Country:xxxxxx-xx</h5>
+            <h5>PHONE NUMBER:XXXXXXX</h5>
+        </div>
+    </footer>
+
+
+     <script src="moviesdata.js"></script>
+    <script>
+        var hollymovs=document.getElementById("hollywood");
+        var bollymovs=document.getElementById("bollywood");
+        var tollymovs=document.getElementById("tollywood");
+
+        const movdata=JSON.parse(localStorage.getItem("moviesdata"));
+        console.log(movdata)
+        for(let i=0;i<movdata.length;i++)
+        {
+            if(movdata[i].lang==='telugu')
+            {
+                tollymovs.append(createmoviecard(movdata[i].id,movdata[i].name,movdata[i].year,movdata[i].poster));
+
+            }
+            else if(movdata[i].lang==='hindi')
+            {
+                bollymovs.append(createmoviecard(movdata[i].id,movdata[i].name,movdata[i].year,movdata[i].poster));
+
+            }
+            else if(movdata[i].lang==='english')
+            {
+                hollymovs.append(createmoviecard(movdata[i].id,movdata[i].name,movdata[i].year,movdata[i].poster));
+
+            }
+        }
+
+       function createmoviecard(id,name,year,poster){
+       var moviecard=document.createElement('div');
+       moviecard.classList.add('moviecard');
+
+       var movpos=document.createElement('img');
+       movpos.src=poster;
+       movpos.setAttribute('height','200px');
+       movpos.setAttribute('width','150px');
+
+       //var name=document.createTextNode("Title:"+name);
+       var name2=document.createElement("h4");
+       name2.textContent=name;
+       //name+=(name2);
+
+       //var year=document.createTextNode("Year:"+year);
+      var year2=document.createElement('h4');
+      year2.textContent=year;
+      // year+=(year2);
+
+       moviecard.append(movpos);
+       moviecard.append(name2);
+       moviecard.append(year2);
+
+       return moviecard;
+
+
+       }
+
+
+    </script>
+    
+</body>
+</html>
